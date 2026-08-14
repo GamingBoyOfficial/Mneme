@@ -32,10 +32,12 @@ jobs:
       - name: Install maturin
         run: pip install maturin
 
-      - name: Build Python bindings
+      - name: Build Python wheel
         working-directory: bindings/python
-        run: maturin develop --release
+        run: maturin build --release
+
+      - name: Install wheel
+        run: pip install bindings/python/target/wheels/*.whl
 
       - name: Run Python roundtrip test
-        working-directory: .
         run: python tests/roundtrip.py
