@@ -29,15 +29,8 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install maturin
-        run: pip install maturin
-
-      - name: Build Python wheel
-        working-directory: bindings/python
-        run: maturin build --release
-
-      - name: Install wheel
-        run: pip install bindings/python/target/wheels/*.whl
+      - name: Install Python bindings
+        run: pip install ./bindings/python
 
       - name: Run Python roundtrip test
         run: python tests/roundtrip.py
