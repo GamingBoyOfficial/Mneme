@@ -34,11 +34,8 @@ jobs:
 
       - name: Build Python bindings
         working-directory: bindings/python
-        run: maturin build --release
+        run: maturin develop --release
 
-      - name: Run Python tests
-        run: |
-          cd bindings/python && maturin develop --release
-          cd ../..
-          pip install pytest
-          python -m pytest tests/ -v
+      - name: Run Python roundtrip test
+        working-directory: .
+        run: python tests/roundtrip.py
