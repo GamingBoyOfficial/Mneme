@@ -21,28 +21,18 @@ Mneme is a memory infrastructure for AI agents, similar to how Redis is for cach
 
 ## 🚀 Quickstart
 
-### Option 1: Python SDK (build from source)
+### Option 1: Python SDK (recommended)
 
-Prerequisites:
-- Rust (stable 1.70+)
-- Python 3.8+
-- `maturin` installed (`pip install maturin`)
-
-Steps:
+Install from PyPI:
 
 ```bash
-# Clone the repository
-git clone https://github.com/GamingBoyOfficial/mneme.git
-cd mneme
-
-# Build and install the Python module
-pip install .
+pip install mneme-memory
 ```
 
-Now you can use Mneme in Python:
+Then use it in Python:
 
 ```python
-import mneme
+import mneme   # package is installed as mneme-memory, but imported as mneme
 
 memory = mneme.Store(agent_id="my-agent", backend="memory.db")
 
@@ -58,6 +48,8 @@ print(context)
 memory.advanced.export("backup.mneme")
 memory.advanced.forget_all(user_id="user_42")
 ```
+
+> **Note:** The PyPI package name is `mneme-memory`. The Python import name remains `mneme`.
 
 ### Option 2: HTTP Server (any language)
 
@@ -92,7 +84,17 @@ You can also open the **web dashboard** (`dashboard.html`) in your browser while
 
 ### Python SDK
 
-If you prefer `maturin develop` for development:
+**Recommended:** `pip install mneme-memory`
+
+For development (build from source):
+
+```bash
+git clone https://github.com/GamingBoyOfficial/Mneme.git
+cd Mneme
+pip install .
+```
+
+Or using maturin directly:
 
 ```bash
 cd bindings/python
