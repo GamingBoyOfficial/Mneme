@@ -1,4 +1,5 @@
 # Mneme — Portable Memory Layer for AI Agents
+[![PyPI version](https://badge.fury.io/py/mneme-memory.svg)](https://pypi.org/project/mneme-memory/)
 
 **Structured, consolidating, forgettable memory that works across any framework.**
 
