@@ -1,0 +1,46 @@
+# Rust
+/target
+Cargo.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.dylib
+*.dll
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal
+
+# Mneme archives
+*.mneme
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maturin build artifacts
+.maturin/
+
+# FastEmbed / Hugging Face cache
+.fastembed_cache/
+.cache/
+*.onnx
+*.bin

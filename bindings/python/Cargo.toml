@@ -1,0 +1,15 @@
+[package]
+name = "mneme"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+
+[lib]
+name = "mneme"
+crate-type = ["cdylib"]
+
+[dependencies]
+mneme-core = { path = "../../core" }
+pyo3 = { version = "0.19", features = ["extension-module"] }
+tokio = { version = "1", features = ["rt-multi-thread"] }
+chrono = { version = "0.4", features = ["serde"] }

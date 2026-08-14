@@ -1,0 +1,6 @@
+target/
+.venv/
+*.db
+*.mneme
+__pycache__/
+.git/

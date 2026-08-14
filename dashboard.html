@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mneme Memory Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
+        input, textarea, button { width: 100%; padding: 8px; margin: 5px 0; }
+        button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+        #result { white-space: pre-wrap; background: #f4f4f4; padding: 10px; margin-top: 20px; }
+        #audit { white-space: pre-wrap; background: #f9f9f9; padding: 10px; margin-top: 20px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Mneme Memory Dashboard</h1>
+
+    <label>Memory content:</label>
+    <textarea id="content" rows="3" placeholder="e.g., User prefers email over Slack"></textarea>
+
+    <label>Memory type:</label>
+    <select id="memory_type">
+        <option value="semantic">Semantic</option>
+        <option value="episodic">Episodic</option>
+    </select>
+
+    <button onclick="remember()">Remember</button>
+
+    <hr>
+
+    <label>Search query:</label>
+    <input type="text" id="query" placeholder="How does the user like to be contacted?">
+
+    <button onclick="recall()">Recall</button>
+
+    <div id="result"></div>
+
+    <hr>
+
+    <button onclick="showAudit()">Show Audit Log</button>
+    <button onclick="exportMemory()">Export Memory</button>
+
+    <div id="audit"></div>
+
+    <script>
+        const base = "http://127.0.0.1:8000";
+
+        async function remember() {
+            const content = document.getElementById("content").value;
+            const memory_type = document.getElementById("memory_type").value;
+            const response = await fetch(`${base}/remember`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content, memory_type })
+            });
+            const data = await response.json();
+            document.getElementById("result").textContent = "Stored: " + JSON.stringify(data, null, 2);
+        }
+
+        async function recall() {
+            const query = document.getElementById("query").value;
+            const response = await fetch(`${base}/recall`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query, limit: 5 })
+            });
+            const data = await response.json();
+            document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function showAudit() {
+            const response = await fetch(`${base}/advanced/audit_log`);
+            const data = await response.json();
+            document.getElementById("audit").textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function exportMemory() {
+            const response = await fetch(`${base}/advanced/export`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ path: "dashboard_export.mneme" })
+            });
+            const data = await response.json();
+            alert("Export status: " + data.status);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+[package]
+name = "mneme-cli"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+
+[dependencies]
+mneme-core = { path = "../core" }
+clap = { version = "4", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+anyhow = "1"
